@@ -3,8 +3,8 @@
 /**
  * @version 0.2 
  */
-class EJustInTimeR extends CWidget {
-
+class EJustInTimeR extends CWidget
+{
     /**
      * Public variables
      */
@@ -24,8 +24,8 @@ class EJustInTimeR extends CWidget {
     private $newName = '';
     private $dimensions = array();
 
-
-    public function init() {
+    public function init()
+    {
         $this->initDimensions();
         $this->checkFolders();
         $this->createUniqueName();
@@ -33,7 +33,8 @@ class EJustInTimeR extends CWidget {
         $this->createImagesIfNotExists();
     }
 
-    private function initDimensions() {
+    private function initDimensions()
+    {
         $this->dimensions = array(
             'big' => array(
                 'width' => 400,
@@ -50,12 +51,14 @@ class EJustInTimeR extends CWidget {
         );
     }
 
-    public function run() {
-        echo '<img src="images/jitr/' . $this->src . '/' . $this->image . '" title="' . $this->getTitle() . '" alt="' . $this->getAlt() . '" />';
+    public function run()
+    {
+        echo '<img src="' . Yii::app()->baseUrl . '/images/jitr/' . $this->src . '/' . $this->image . '" title="' . $this->getTitle() . '" alt="' . $this->getAlt() . '" />';
     }
 
-    private function createImagesIfNotExists() {
-        if (!file_exists($this->bigPath) || !file_exists($this->thumbPath)) {
+    private function createImagesIfNotExists()
+    {
+        if (!file_exists($this->src . '/' . $this->image)) {
             Yii::import('application.extensions.image.Image');
             $image = new Image($this->original);
             foreach ($this->dimensions as $path => $dim) {
@@ -68,7 +71,8 @@ class EJustInTimeR extends CWidget {
         }
     }
 
-    private function initPathVars() {
+    private function initPathVars()
+    {
         $this->original = __DIR__ . '/../../../images/jitr/originals/' . ($this->image);
         foreach ($this->dimensions as $path => $dim) {
             $pathName = $path . 'Path';
@@ -76,11 +80,13 @@ class EJustInTimeR extends CWidget {
         }
     }
 
-    private function createUniqueName() {
+    private function createUniqueName()
+    {
         $this->newName = $this->image;
     }
 
-    private function checkFolders() {
+    private function checkFolders()
+    {
         foreach (array(
     __DIR__ . '/../../../images/jitr',
     __DIR__ . '/../../../images/jitr/originals',
@@ -94,11 +100,13 @@ class EJustInTimeR extends CWidget {
             throw new Exception('Image cannot be null!');
     }
 
-    private function getTitle() {
+    private function getTitle()
+    {
         return $this->title ? $this->title : $this->image;
     }
 
-    private function getAlt() {
+    private function getAlt()
+    {
         return $this->alt ? $this->alt : $this->image;
     }
 
