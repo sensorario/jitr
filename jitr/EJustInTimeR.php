@@ -12,15 +12,15 @@ class EJustInTimeR extends CWidget
     public $display = 'thumb';
     public $title = null;
     public $alt = null;
-    public $bigPath;
-    public $thumbPath;
-    public $microPath;
+    private $src = 'micro';
 
     /**
      * Private variables
      */
+    private $bigPath;
+    private $thumbPath;
+    private $microPath;
     private $original;
-    private $src = 'micro';
     private $newName = '';
     private $dimensions = array();
 
